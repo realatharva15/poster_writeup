@@ -55,7 +55,7 @@ use auxiliary/scanner/postgres/postgres_sql
 by using this module we find the exact version of the postgresql used in this rdbms system. (remember to set the required options every time you use a different module)
 
 ```bash
-set username <username_found_in_question4>
+set USERNAME <username_found_in_question4>
 set PASSWORD <password_found_in_question4>
 ```
 
