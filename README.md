@@ -2,7 +2,7 @@
 # Author: Atharva Bordavekar
 # Difficulty: Easy
 # Points: 360 
-# Vulnerabilities: Default credentials, RCE, vulnerable postgresqp version
+# Vulnerabilities: Default credentials, RCE, vulnerable postgresql version, credentials inside files with weak permissions
 
 # Phase 1 - Reconnaissance:
 
@@ -76,24 +76,34 @@ we wont be requiring this module since it is not relevant in getting an initial 
 ```bash
 use exploit/multi/postgres/postgres_copy_from_program_cmd_exec
 ```
-
+# Shell as postgres
 we enter the RHOSTS, USERNAME, PASSWORD once again and then hit on exploit
 
 ```bash
 exploit
 ```
-this will grant us a shell with a terrible tty to instead we will find a way to get access to a more privileged user on the system and try to find if their credentials exist on this system or not. after doing some manual enumeration we find out that there exists a credential.txt at the /home/dark directory which contains the password of the user dark. we login via ssh
+this will grant us a shell as postgres with a terrible tty to instead we will find a way to get access to a more privileged user on the system and try to find if their credentials exist on this system or not. after doing some manual enumeration we find out that there exists a credential.txt at the /home/dark directory which contains the password of the user dark. we login via ssh
+# Shell as dark:
+
+simply read the contents of this file and use it to login into ssh 
+```bash
+cat /home/dark/credential.txt
+```
 
 ```bash
-ssh dark@<targte_ip>
+ssh dark@<target_ip>
 ```
 we have a shell as dark! now lets run linpeas on the system to find any hidden files or any processes that can help us escalate privileges horizontally. after running linpeas on the system, i find out that there exists a /var/www/html/config.php which contains the password of some database user. often in ctfs, the database password belongs to the user with the higher privileges on the system which is clearly alison. so we use su alison and enter the password when prompted
+
+# Shell as alison:
 
 ```bash
 su alison
 #enter the password after prompted
 ```
 we have a shell as alison. now lets find out what commands this user can execute as root.
+
+# Phase 3 - Privilege Escalation: 
 
 ```bash
 sudo -l
