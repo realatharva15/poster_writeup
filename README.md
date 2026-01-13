@@ -82,12 +82,12 @@ we enter the RHOSTS, USERNAME, PASSWORD once again and then hit on exploit
 ```bash
 exploit
 ```
-this will grant us a shell as postgres with a terrible tty to instead we will find a way to get access to a more privileged user on the system and try to find if their credentials exist on this system or not. after doing some manual enumeration we find out that there exists a credential.txt at the /home/dark directory which contains the password of the user dark. we login via ssh
+this will grant us a shell as postgres with a terrible tty to instead we will find a way to get access to a more privileged user on the system and try to find if their credentials exist on this system or not. after doing some manual enumeration we find out that there exists a credentials.txt at the /home/dark directory which contains the password of the user dark. we login via ssh
 # Shell as dark:
 
 simply read the contents of this file and use it to login into ssh 
 ```bash
-cat /home/dark/credential.txt
+cat /home/dark/credentials.txt
 ```
 
 ```bash
