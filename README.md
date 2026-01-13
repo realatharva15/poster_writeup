@@ -72,6 +72,7 @@ auxiliary/admin/postgres/postgres_readfile
 ```
 we wont be requiring this module since it is not relevant in getting an initial foothold. instead we will use the module which will grant us a shell on the system with a good tty
 
+# Phase 2 - Initial Foothold:
 ```bash
 use exploit/multi/postgres/postgres_copy_from_program_cmd_exec
 ```
@@ -106,5 +107,4 @@ well i expected more from this room but since it is a boot2root ctf we will get 
 ```bash
 sudo bash
 ```
-
 we have the root shell. we read and submit the user.txt and root.txt flags
